@@ -1,6 +1,7 @@
 ﻿namespace GeoLib.Services
 {
     using System.Collections.Generic;
+    using System.Linq;
     using GeoLib.Contracts;
     using GeoLib.Data;
 
@@ -14,7 +15,7 @@
 
             ZipCode zipCodeEntity = zipCodeRepository.GetByZip(zip);
 
-            if (zipCodeData != null)
+            if (zipCodeEntity != null)
             {
                 zipCodeData = new ZipCodeData()
                 {
@@ -22,26 +23,74 @@
                     State = zipCodeEntity.State.Abbreviation,
                     ZipCode = zipCodeEntity.Zip
                 };
-
             }
-
-
+            
             return zipCodeData;
         }
 
         public IEnumerable<string> GetStates(bool primaryOnly)
         {
-            throw new System.NotImplementedException();
+            List<string> stateData = new List<string>();
+
+            IStateRepository stateRepository = new StateRepository();
+
+            IEnumerable<State> states = stateRepository.Get(primaryOnly);
+
+            if (states != null)
+            {
+                stateData.AddRange(states.Select(state => state.Abbreviation));
+            }
+            
+            return stateData;
         }
 
         public IEnumerable<ZipCodeData> GetZips(string state)
         {
-            throw new System.NotImplementedException();
+            List<ZipCodeData> zipCodeData = new List<ZipCodeData>();
+
+            IZipCodeRepository zipCodeRepository = new ZipCodeRepository();
+
+            var zips = zipCodeRepository.GetByState(state);
+            if (zips != null)
+            {
+                foreach (var zipCode in zips)
+                {
+                    zipCodeData.Add(new ZipCodeData()
+                    {
+                        City = zipCode.City,
+                        State = zipCode.State.Abbreviation,
+                        ZipCode = zipCode.Zip
+                    });
+                }
+            }
+            
+            return zipCodeData;
         }
 
         public IEnumerable<ZipCodeData> GetZips(string zip, int range)
         {
-            throw new System.NotImplementedException();
+            List<ZipCodeData> zipCodeData = new List<ZipCodeData>();
+
+            IZipCodeRepository zipCodeRepository = new ZipCodeRepository();
+
+            ZipCode zipEntity = zipCodeRepository.GetByZip(zip);
+
+            IEnumerable<ZipCode> zips = zipCodeRepository.GetZipsForRange(zipEntity, range);
+
+            if (zips != null)
+            {
+                foreach (var zipCode in zips)
+                {
+                    zipCodeData.Add(new ZipCodeData()
+                    {
+                        City = zipCode.City,
+                        State = zipCode.State.Abbreviation,
+                        ZipCode = zipCode.Zip
+                    });
+                }
+            }
+            
+            return zipCodeData;
         }
     }
 }
