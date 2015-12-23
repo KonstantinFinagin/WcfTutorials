@@ -2,10 +2,21 @@
 {
     using System.Collections.Generic;
     using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using GeoLib.Contracts;
 
     public class GeoClient : ClientBase<IGeoService>, IGeoService
     {
+        public GeoClient(string endpointName) : base(endpointName)
+        {
+            
+        }
+
+        public GeoClient(Binding binding, EndpointAddress address) : base(binding, address)
+        {
+            
+        }
+
         public ZipCodeData GetZipInfo(string zip)
         {
             return Channel.GetZipInfo(zip);

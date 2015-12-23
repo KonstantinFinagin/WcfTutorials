@@ -55,13 +55,13 @@
                     >Make call</Button>
         </StackPanel>
 
-        <ListBox Grid.Row="4" Margin="5">
+        <ListBox Grid.Row="4" Margin="5" ItemsSource="{Binding ZipCodes}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBox Text="{Binding ZipCode}"/>
-                        <TextBox Text=" - "/>
-                        <TextBox Text="{Binding City}"/>
+                        <TextBlock Text="{Binding ZipCode}"/>
+                        <TextBlock Text=" - "/>
+                        <TextBlock Text="{Binding City}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
