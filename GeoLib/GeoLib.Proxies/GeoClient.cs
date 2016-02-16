@@ -5,6 +5,7 @@
     using System.ServiceModel.Channels;
     using GeoLib.Contracts;
 
+    // used in client apps
     public class GeoClient : ClientBase<IGeoService>, IGeoService
     {
         public GeoClient(string endpointName) : base(endpointName)
@@ -12,6 +13,7 @@
             
         }
 
+        // Constructor overload to target different endpoints
         public GeoClient(Binding binding, EndpointAddress address) : base(binding, address)
         {
             

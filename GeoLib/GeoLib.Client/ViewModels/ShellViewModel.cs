@@ -16,11 +16,6 @@
     {
         public ShellViewModel()
         {
-            this.DisplayName = "UI running on Thread" + 
-                Thread.CurrentThread.ManagedThreadId + 
-                " | Process " + 
-                Process.GetCurrentProcess().Id.ToString();
-
             this.ZipCodes = new ObservableCollection<ZipCodeData>();
         }
 
