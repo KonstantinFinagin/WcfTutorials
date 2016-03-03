@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GeoLib.WindowsHost.Properties
+namespace GeoLib.WindowsHost.Services.Services.Contracts.Contracts.Properties
 {
 
 

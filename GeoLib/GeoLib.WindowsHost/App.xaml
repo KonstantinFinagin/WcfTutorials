@@ -1,7 +1,7 @@
-﻿<Application x:Class="GeoLib.WindowsHost.App"
+﻿<Application x:Class="GeoLib.WindowsHost.Services.Contracts.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:GeoLib.WindowsHost"
+             xmlns:local="clr-namespace:GeoLib.WindowsHost.Services.Contracts"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          

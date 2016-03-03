@@ -7,6 +7,7 @@
     using System.ServiceModel.Channels;
     using System.Threading;
     using Caliburn.Micro;
+    using GeoLib.Client.Contracts;
     using GeoLib.Contracts;
     using GeoLib.Proxies;
     using PropertyChanged;
@@ -65,7 +66,17 @@
         }
 
         public void MakeCall()
-        { }
+        {
+            // name it blank! - a bug
+            ChannelFactory<IMessageService> factory = new ChannelFactory<IMessageService>("");
+
+            // obtaiing channel from a factory
+            IMessageService proxy = factory.CreateChannel();
+
+            proxy.ShowMsg(TextToShow);
+
+            factory.Close();
+        }
 
 
     }
