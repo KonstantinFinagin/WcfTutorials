@@ -9,7 +9,12 @@
         <StackPanel Orientation="Vertical">
             <Button x:Name="btnStart" Margin="10" Click="BtnStart_OnClick">Start</Button>
             <Button x:Name="btnStop" Margin="10" Click="BtnStop_OnClick">Stop</Button>
+
+            <Button x:Name="btnInProc" Margin="10" Click="BtnInProc_OnClick">InProcService</Button>
+            
             <Label x:Name="lblMessage" Margin="10" HorizontalAlignment="Left"/>
+        
+        
         </StackPanel>
     </Grid>
 </Window>

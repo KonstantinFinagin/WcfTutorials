@@ -5,6 +5,7 @@
     using System.Threading;
     using System.Windows;
     using GeoLib.Services;
+    using GeoLib.WindowsHost.Contracts;
     using GeoLib.WindowsHost.Services;
 
     /// <summary>
@@ -45,6 +46,7 @@
         private void BtnStop_OnClick(object sender, RoutedEventArgs e)
         {
             this.hostGeoManager.Close();
+            this.hostMessageManager.Close();
 
             this.btnStart.IsEnabled = true;
             this.btnStop.IsEnabled = false;
@@ -56,6 +58,19 @@
             int threadId = Thread.CurrentThread.ManagedThreadId;
 
             this.lblMessage.Content = message + Environment.NewLine;
+        }
+
+        private void BtnInProc_OnClick(object sender, RoutedEventArgs e)
+        {
+            // empty name to avoid a bug
+            var channelFactory = new ChannelFactory<IMessageService>("");
+
+            var proxy = channelFactory.CreateChannel();
+
+            proxy.ShowMessage(DateTime.Now.ToLongTimeString() + 
+                " from in-process call");
+
+            channelFactory.Close();
         }
     }
 }
