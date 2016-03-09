@@ -25,10 +25,14 @@
             MainUI = this;
 
             Title = "UI Running on Thread " + Thread.CurrentThread.ManagedThreadId;
+
+            this.syncContext = SynchronizationContext.Current;
         }
 
         private ServiceHost hostGeoManager = null;
         private ServiceHost hostMessageManager = null;
+
+        private SynchronizationContext syncContext = null;
 
         private void BtnStart_OnClick(object sender, RoutedEventArgs e)
         {
@@ -57,7 +61,12 @@
         {
             int threadId = Thread.CurrentThread.ManagedThreadId;
 
-            this.lblMessage.Content = message + Environment.NewLine;
+            SendOrPostCallback callback = arg =>
+            {
+                this.lblMessage.Content = message + Environment.NewLine;
+            };
+        
+            this.syncContext.Send(callback, null);
         }
 
         private void BtnInProc_OnClick(object sender, RoutedEventArgs e)
