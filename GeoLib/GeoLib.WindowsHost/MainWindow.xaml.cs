@@ -1,6 +1,7 @@
 ﻿namespace GeoLib.WindowsHost
 {
     using System;
+    using System.Diagnostics;
     using System.ServiceModel;
     using System.Threading;
     using System.Windows;
@@ -63,7 +64,11 @@
 
             SendOrPostCallback callback = arg =>
             {
-                this.lblMessage.Content = message + Environment.NewLine;
+                this.lblMessage.Content = message + Environment.NewLine +
+                                          " (marshalled from thread " + threadId + " to thread " +
+                                          Thread.CurrentThread.ManagedThreadId.ToString() +
+                                          " | Process " + Process.GetCurrentProcess().Id.ToString() + ")";
+                
             };
         
             this.syncContext.Send(callback, null);
