@@ -71,15 +71,21 @@
 
         private void BtnInProc_OnClick(object sender, RoutedEventArgs e)
         {
-            // empty name to avoid a bug
-            var channelFactory = new ChannelFactory<IMessageService>("");
+            var thread = new Thread(() =>
+            {
+                // empty name to avoid a bug
+                var channelFactory = new ChannelFactory<IMessageService>("");
 
-            var proxy = channelFactory.CreateChannel();
+                var proxy = channelFactory.CreateChannel();
 
-            proxy.ShowMessage(DateTime.Now.ToLongTimeString() + 
-                " from in-process call");
+                proxy.ShowMessage(DateTime.Now.ToLongTimeString() +
+                                  " from in-process call");
 
-            channelFactory.Close();
+                channelFactory.Close();
+            });
+
+            thread.IsBackground = true;
+            thread.Start();
         }
     }
 }
