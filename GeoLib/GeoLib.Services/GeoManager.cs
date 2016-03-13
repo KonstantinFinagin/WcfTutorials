@@ -1,5 +1,6 @@
 ﻿namespace GeoLib.Services
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
@@ -33,7 +34,7 @@
 
         public ZipCodeData GetZipInfo(string zip)
         {
-            Thread.Sleep(10000);
+            throw new DivideByZeroException("you can't do that");
 
             ZipCodeData zipCodeData = null;
 
