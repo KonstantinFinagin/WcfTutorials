@@ -33,7 +33,7 @@
         {
             if (string.IsNullOrEmpty(ZipCode)) return;
 
-            GeoClient proxy = new GeoClient("httpEP");
+            GeoClient proxy = new GeoClient("tcpEP");
 
             ZipCodeData data = proxy.GetZipInfo(ZipCode);
             if (data == null) return;
