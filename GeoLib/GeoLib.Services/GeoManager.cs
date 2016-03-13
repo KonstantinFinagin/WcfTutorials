@@ -8,7 +8,6 @@
     using GeoLib.Contracts;
     using GeoLib.Data;
 
-    [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
     public class GeoManager : IGeoService
     {
         private readonly IStateRepository _StateRepository;
@@ -36,8 +35,6 @@
 
         public ZipCodeData GetZipInfo(string zip)
         {
-            throw new DivideByZeroException("you can't do that");
-
             ZipCodeData zipCodeData = null;
 
             IZipCodeRepository zipCodeRepository = this._ZipCodeRepository ?? new ZipCodeRepository();
