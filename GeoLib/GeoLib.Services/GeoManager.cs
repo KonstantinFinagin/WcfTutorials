@@ -8,7 +8,6 @@
     using GeoLib.Contracts;
     using GeoLib.Data;
 
-    [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
     public class GeoManager : IGeoService
     {
         private readonly IStateRepository _StateRepository;

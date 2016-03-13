@@ -9,7 +9,8 @@
     {
         static void Main(string[] args)
         {
-            ServiceHost hostGeoManager = new ServiceHost(typeof(GeoManager));
+            ServiceHost hostGeoManager = 
+                new ServiceHost(typeof(GeoManager));
             hostGeoManager.Open();
 
             Console.WriteLine("Services started. Press [Enter] to soutdown.");
