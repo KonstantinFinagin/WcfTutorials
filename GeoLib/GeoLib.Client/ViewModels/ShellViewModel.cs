@@ -48,10 +48,7 @@
         { 
             if (string.IsNullOrEmpty(State)) return;
 
-            EndpointAddress address = new EndpointAddress("net.tcp://localhost:8009/GeoService");
-            Binding binding = new NetTcpBinding();
-
-            GeoClient proxy = new GeoClient(binding, address);
+            GeoClient proxy = new GeoClient("tcpEP");
 
             var data = proxy.GetZips(State);
 
