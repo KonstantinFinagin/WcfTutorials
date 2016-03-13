@@ -35,8 +35,6 @@
 
         public ZipCodeData GetZipInfo(string zip)
         {
-            throw new DivideByZeroException("you can't do that");
-
             ZipCodeData zipCodeData = null;
 
             IZipCodeRepository zipCodeRepository = this._ZipCodeRepository ?? new ZipCodeRepository();

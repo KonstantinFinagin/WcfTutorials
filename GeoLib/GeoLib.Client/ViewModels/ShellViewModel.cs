@@ -33,13 +33,16 @@
         {
             if (string.IsNullOrEmpty(ZipCode)) return;
 
-            GeoClient proxy = new GeoClient("tcpEP");
+            ServiceReference1.GeoServiceClient proxy = 
+                new ServiceReference1.GeoServiceClient();
 
-            ZipCodeData data = proxy.GetZipInfo(ZipCode);
-            if (data == null) return;
-            
-            CityText = data.City;
-            StateText = data.State;
+            var data = proxy.GetZipInfo(ZipCode);
+
+            if (data != null)
+            {
+                CityText = data.City;
+                StateText = data.State;
+            }
 
             proxy.Close();
         }
