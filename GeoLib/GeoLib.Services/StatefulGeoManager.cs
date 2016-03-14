@@ -10,7 +10,7 @@ namespace GeoLib.Services
     using GeoLib.Contracts;
     using GeoLib.Data;
 
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
     public class StatefulGeoManager : IStatefulGeoService
     {
         private ZipCode zipCodeEntity;
