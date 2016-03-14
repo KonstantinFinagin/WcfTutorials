@@ -9,27 +9,12 @@
     {
         static void Main(string[] args)
         {
-            ServiceHost hostGeoManager = 
-                new ServiceHost(
-                    typeof(GeoManager), 
-                    new Uri("http://localhost:8080"),
-                    new Uri("net.tcp://localhost:8009"));
-
-            ServiceMetadataBehavior behavior = hostGeoManager.Description.Behaviors.Find<ServiceMetadataBehavior>();
-            if (behavior == null)
-            {
-                behavior = new ServiceMetadataBehavior();
-                behavior.HttpGetEnabled = true;
-                hostGeoManager.Description.Behaviors.Add(behavior);
-            }
-
-            hostGeoManager.AddServiceEndpoint(
-                typeof (IMetadataExchange),
-                MetadataExchangeBindings.CreateMexTcpBinding(),
-                "MEX"
-                );
+            ServiceHost hostGeoManager = new ServiceHost(typeof(GeoManager));
 
             hostGeoManager.Open();
+
+            ServiceHost hostStatefulGeoManager = new ServiceHost(typeof(StatefulGeoManager));
+            hostStatefulGeoManager.Open();
 
             Console.WriteLine("Services started. Press [Enter] to soutdown.");
             Console.ReadLine();

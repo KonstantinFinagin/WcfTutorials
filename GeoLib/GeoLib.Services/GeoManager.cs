@@ -8,10 +8,13 @@
     using GeoLib.Contracts;
     using GeoLib.Data;
 
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public class GeoManager : IGeoService
     {
         private readonly IStateRepository _StateRepository;
         private readonly IZipCodeRepository _ZipCodeRepository;
+
+        private int counter = 0;
 
         public GeoManager()
         {
@@ -50,9 +53,12 @@
                     ZipCode = zipCodeEntity.Zip
                 };
             }
-            
+
+            this.counter++;
+            Console.WriteLine(this.counter);
             return zipCodeData;
         }
+
 
         public IEnumerable<string> GetStates(bool primaryOnly)
         {
