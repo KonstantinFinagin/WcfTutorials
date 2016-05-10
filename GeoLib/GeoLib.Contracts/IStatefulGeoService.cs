@@ -3,16 +3,16 @@
     using System.Collections.Generic;
     using System.ServiceModel;
 
-    [ServiceContract]
+    [ServiceContract(SessionMode = SessionMode.Required)]
     public interface IStatefulGeoService
     {
         [OperationContract]
         void PushZip(string zip);
 
-        [OperationContract]
+        [OperationContract(IsInitiating = false)]
         ZipCodeData GetZipInfo();
         
-        [OperationContract]
+        [OperationContract(IsInitiating = false)]
         IEnumerable<ZipCodeData> GetZips(int range);
     }
 }

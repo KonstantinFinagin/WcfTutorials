@@ -35,10 +35,10 @@ namespace GeoLib.Services
                     ZipCode = this.zipCodeEntity.Zip
                 };
             }
-            else
-            {
-                throw new ApplicationException("Uh oh");
-            }
+//            else
+//            {
+//                throw new ApplicationException("Uh oh");
+//            }
             return zipCodeData;
         }
 
@@ -65,10 +65,10 @@ namespace GeoLib.Services
                     }
                 }
             }
-            else
-            {
-                throw new ApplicationException("Uh oh");
-            }
+//            else
+//            {
+//                throw new ApplicationException("Uh oh");
+//            }
 
             return zipCodeData;
         }
