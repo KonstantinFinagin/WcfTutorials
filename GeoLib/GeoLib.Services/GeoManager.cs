@@ -8,7 +8,7 @@
     using GeoLib.Contracts;
     using GeoLib.Data;
 
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall, ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class GeoManager : IGeoService
     {
         private readonly IStateRepository _StateRepository;

@@ -1,4 +1,6 @@
-﻿namespace GeoLib.Client.ViewModels
+﻿using System.Threading.Tasks;
+
+namespace GeoLib.Client.ViewModels
 {
     using System.Collections.ObjectModel;
     using System.Diagnostics;
@@ -33,19 +35,25 @@
 
         public ObservableCollection<ZipCodeData> ZipCodes { get; set; } 
         
-        public void GetInfo()
+        public async Task GetInfo()
         {
-            
-            if (string.IsNullOrEmpty(ZipCode)) return;
-            
-            var data = this.statefulProxy.GetZipInfo();
 
-            if (data != null)
+            if (string.IsNullOrEmpty(ZipCode))
             {
-                CityText = data.City;
-                StateText = data.State;
+                return;
             }
-            
+
+            await Task.Run(() =>
+            {
+                var data = this.statefulProxy.GetZipInfo();
+
+                if (data != null)
+                {
+                    CityText = data.City;
+                    StateText = data.State;
+                }
+            }
+            );
         }
 
         public void GetZipCodes()
